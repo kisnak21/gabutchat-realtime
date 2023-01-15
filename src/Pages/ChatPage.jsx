@@ -3,6 +3,14 @@ import { AiOutlineSend, AiOutlineMenu } from 'react-icons/ai';
 import moment from 'moment/moment';
 import Menu from '../Components/Menu';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../firebaseService';
+import {
+   collection,
+   doc,
+   getDocs,
+   setDoc,
+   onSnapshot,
+} from 'firebase/firestore';
 
 const ChatPage = () => {
    const [showMenu, setShowMenu] = useState(false);
@@ -23,13 +31,45 @@ const ChatPage = () => {
    const [loading, setLoading] = useState(true);
    const navigate = useNavigate();
 
+   // data dari collection chat
+   const getChatCollection = async () => {
+      const arrCol = [];
+      const chatColRef = await collection(db, 'chat');
+      const result = await getDocs(chatColRef);
+      result.forEach((e) => {
+         arrCol.push(e.data());
+      });
+      return arrCol;
+   };
+
+   // realtime update chat
+   const trigChat = () => {
+      const chatRef = collection(db, 'chat');
+      onSnapshot(chatRef, (rec) => {
+         getChatCollection().then((res) => {
+            setChat(res);
+         });
+      });
+   };
+
+   // did mount
    useEffect(() => {
       const user = localStorage.getItem('gabutchat_user');
       if (!user) {
          navigate('/');
       }
+
+      getChatCollection().then((res) => {
+         setChat(res);
+      });
       setLoading(false);
-   }, []);
+
+      // did update
+      return () => {
+         trigChat();
+      };
+   }, [db]);
+
    const handleMenu = () => {
       setShowMenu(!showMenu);
    };
@@ -39,6 +79,7 @@ const ChatPage = () => {
       window.scrollTo(0, docH);
    };
 
+   // handle chat
    const handleChat = (e) => {
       e.preventDefault();
       const cht = e.target.chat.value;
@@ -49,15 +90,16 @@ const ChatPage = () => {
 
       const user = JSON.parse(localStorage.getItem('gabutchat_user'));
       e.target.chat.value = '';
-      setChat([
-         ...chat,
-         {
-            id: Date.now(),
-            chat: cht,
-            createdAt: Date.now(),
-            user: user,
-         },
-      ]);
+
+      const chatRef = doc(db, 'chat', Date.now() + logUser.username);
+      setDoc(chatRef, {
+         id: Date.now(),
+         chat: cht,
+         createdAt: Date.now(),
+         user: user,
+      }).then((res) => {
+         console.log(res);
+      });
       scrollChat();
    };
 
