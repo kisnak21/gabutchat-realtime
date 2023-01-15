@@ -14,9 +14,6 @@ const Menu = () => {
          <div className="flex h-10 w-full items-center justify-between px-3">
             <MdLogout onClick={handleLogout} /> Logout
          </div>
-         <div className="flex h-10 w-full items-center justify-between px-3">
-            <IoSettingsOutline /> Setting
-         </div>
       </div>
    );
 };

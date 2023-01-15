@@ -34,7 +34,7 @@ const LoginPage = () => {
    };
 
    return (
-      <main className="flex h-screen w-screen flex-col bg-gradient-to-t from-orange-700 to-orange-500 p-8">
+      <main className="flex h-screen w-screen flex-col bg-gradient-to-r from-[#1488cc] to-[#2b32b2] p-8">
          <form
             className="z-[999] flex w-full flex-col gap-4 rounded-lg bg-white p-6 shadow-lg"
             onSubmit={handleSubmit}
@@ -46,7 +46,7 @@ const LoginPage = () => {
                   className="mx-auto h-28 w-28"
                />
                <button
-                  className="absolute -right-3 top-16 h-8 w-8 rounded-full bg-slate-600 text-white"
+                  className="absolute -right-3 top-16 h-8 w-8 rounded-full bg-blue-300 text-white"
                   type="button"
                   onClick={handleAvatar}
                >

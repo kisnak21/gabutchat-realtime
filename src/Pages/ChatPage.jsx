@@ -112,7 +112,7 @@ const ChatPage = () => {
    }
    return (
       <main className="flex h-screen w-screen flex-col">
-         <header className="fixed top-0 left-0 flex h-16 w-full items-center justify-between bg-gradient-to-r from-orange-500 to-orange-600 px-6">
+         <header className="fixed top-0 left-0 flex h-16 w-full items-center justify-between bg-gradient-to-r from-[#1488cc] to-[#2b32b2] px-6">
             <div className="flex items-center gap-2 text-white">
                <img src={logUser?.avatar} alt="avatar" className="h-10 w-10" />
                <h1 className="">@{logUser?.username}</h1>
@@ -162,7 +162,7 @@ const ChatPage = () => {
          </div>
 
          <form
-            className="gradient fixed bottom-0 left-0 flex h-16 w-full items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 px-6"
+            className="gradient fixed bottom-0 left-0 flex h-16 w-full items-center gap-2 bg-gradient-to-r from-[#1488cc] to-[#2b32b2] px-6"
             onSubmit={handleChat}
          >
             <input
@@ -170,7 +170,7 @@ const ChatPage = () => {
                className="h-10 flex-1 rounded-xl bg-white px-4"
                id="chat"
             />
-            <button className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-700 text-white">
+            <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500 text-white">
                <AiOutlineSend />
             </button>
          </form>

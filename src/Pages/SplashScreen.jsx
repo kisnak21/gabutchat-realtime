@@ -15,7 +15,7 @@ const SplashScreen = () => {
       }
    }, []);
    return (
-      <main className="flex h-screen w-screen flex-col bg-gradient-to-t from-orange-700 to-orange-500 p-8">
+      <main className="flex h-screen w-screen flex-col bg-gradient-to-r from-[#1488cc] to-[#2b32b2] p-8">
          <h1 className="text-6xl font-bold leading-10 text-white">
             Boring Chat App
          </h1>
